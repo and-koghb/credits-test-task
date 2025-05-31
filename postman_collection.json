@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "72068975-d50f-4349-8bc9-54e12fee5adf",
+		"name": "Credits test task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "208981"
+	},
+	"item": [
+		{
+			"name": "clients",
+			"item": [
+				{
+					"name": "clients",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{host}}",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Petr Pavel\",\r\n    \"age\": 35,\r\n    \"region\": \"PR\",\r\n    \"income\": 1500,\r\n    \"score\": 600,\r\n    \"pin\": \"123-45-6789\",\r\n    \"email\": \"petr.pavel@example.com\",\r\n    \"phone\": \"+420123456789\"\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/clients",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "credits",
+			"item": [
+				{
+					"name": "credits/apply",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{host}}",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pin\": \"123-45-6789\",\r\n    \"name\": \"Personal Loan\",\r\n    \"amount\": 1000,\r\n    \"rate\": 10,\r\n    \"start_date\": \"2025-06-07\",\r\n    \"end_date\": \"2026-06-05\"\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/credits/apply",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"credits",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "credits/give",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "{{host}}",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pin\": \"123-45-6789\",\r\n    \"name\": \"Personal Loan\",\r\n    \"amount\": 1000,\r\n    \"rate\": 12,\r\n    \"start_date\": \"2025-06-01\",\r\n    \"end_date\": \"2026-06-01\"\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/credits/give",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"credits",
+								"give"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://credits-test-task.loc"
+		}
+	]
+}

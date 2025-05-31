@@ -1,0 +1,7 @@
+services:
+    App\Repositories\ClientRepository: '@App\Tests\Fakes\TestClientRepository'
+
+    App\Tests\Fakes\TestClientRepository:
+        arguments:
+            $filePath: '%kernel.project_dir%/var/test_clients.json'
+            $serializer: '@serializer'
