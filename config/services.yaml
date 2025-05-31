@@ -16,9 +16,50 @@ services:
     App\:
         resource: '../src/'
         exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
+            - '../src/Domain/'
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Domain\Credit\Modifiers\OstravaClientRateModifier:
+        tags: ['credit_modifier']
+
+    App\Domain\Credit\Rules\ClientMinimumScoreRule:
+        tags: ['credit_application_rule']
+    App\Domain\Credit\Rules\ClientMinimumIncomeRule:
+        tags: ['credit_application_rule']
+    App\Domain\Credit\Rules\ClientValidAgeRule:
+        tags: ['credit_application_rule']
+    App\Domain\Credit\Rules\ClientValidRegionRule:
+        tags: ['credit_application_rule']
+    App\Domain\Credit\Rules\PragueRandomPassRule:
+        tags: ['credit_application_rule']
+
+    App\Notifiers\LogNotifier:
+        arguments:
+            $logger: '@monolog.logger.credit'
+
+    App\Repositories\ClientRepository:
+        arguments:
+            $filePath: '%kernel.project_dir%/var/storage/clients.json'
+    App\Repositories\CreditRepository:
+        arguments:
+            $storageDirectory: '%kernel.project_dir%/var/storage'
+
+    App\Services\ApplicationService:
+        arguments:
+            $storageDirectory: '%kernel.project_dir%/var/storage'
+    App\Services\GiveCreditService:
+        arguments:
+            $rules: !tagged_iterator credit_application_rule
+            $modifiers: !tagged_iterator credit_modifier
+
+    App\Validators\ExistingPinValidator:
+        arguments:
+            - '@App\Repositories\ClientRepository'
+        tags: [validator.constraint_validator]
+    App\Validators\UniquePinValidator:
+        arguments:
+            - '@App\Repositories\ClientRepository'
+        tags: [validator.constraint_validator]

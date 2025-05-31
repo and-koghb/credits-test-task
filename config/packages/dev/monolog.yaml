@@ -1,0 +1,14 @@
+monolog:
+    channels: ['credit']
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: ["!event", "!credit"]
+        credit_file:
+            type: stream
+            path: "%kernel.logs_dir%/credits.log"
+            level: info
+            channels: ["credit"]
+            formatter: monolog.formatter.line
